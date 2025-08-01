@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Flask Website</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  <style>
+    table.data { border-collapse: collapse; width: 100%; }
+    table.data th, table.data td { border: 1px solid #999; padding: 4px; }
+  </style>
+</head>
+<body>
+  <header class="header">
+    <h1>COBS2 ダメージ計算サイト</h1>
+    <nav>
+      <ul>
+        <li><a href="{{ url_for('index') }}">ホーム</a></li>
+        <li><a href="{{ url_for('show_type_chart') }}">タイプ相性表</a></li>
+        <li><a href="#">お問い合わせ</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- 移動させるGIF画像
+  <img id="myGif" src="{{ url_for('static', filename='images/morobareru_v2.gif') }}" style="position: absolute; top: 90px; left: 0px; width:100px;">
+  -->
+
+  <!--JavaScriptの読み込み
+  <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+
+  <div class="video-background">
+    <video autoplay muted loop id="bgVideo">
+      <source src="{{ url_for('static', filename='videos/background.mp4') }}" type="video/mp4">
+      お使いのブラウザは動画をサポートしていません
+    </video>
+  </div>-->
+
+  <!-- <audio autoplay loop>
+  <source src="{{ url_for('static', filename='audio/bgm1.mp3') }}" type="audio/mpeg">
+  お使いのブラウザはオーディオをサポートしていません
+  </audio> -->
+
+  <!-- <audio id="bgm" loop>
+  <source src="{{ url_for('static', filename='audio/bgm1.mp3') }}" type="audio/mpeg">
+  </audio>
+
+  <button onclick="document.getElementById('bgm').play()">音楽再生</button>
+  <button onclick="document.getElementById('bgm').pause()">音楽停止</button> --> -->
+
+  <main>
+    <section class="center-section">
+      <h2>About</h2>
+      <p>COB2用のダメージ計算サイトです．”テラスタル”×”ダイマックス”×”メガシンカ”×”Z技”の共用を加味しています．</p>
+    </section>
+
+    <!-- <h1>DataBase</h1> -->
+    <!-- 検索フォーム -->
+    <!-- <form method="get" action="{{ url_for('index') }}">
+      <input type="text" name="search_name" placeholder="名前を検索" value="{{ search_name }}">
+      <button type="submit">検索</button>
+      {% if search_name %}
+        <p>検索結果: "{{ search_name }}" に一致するデータ</p>
+      {% endif %}
+    </form>
+
+    <ul>
+      {% if data %}
+        {% for item in data %}
+          <li>{{ item.name }}: HP={{ item.hp }}</li>
+        {% endfor %}
+      {% else %}
+        <li>該当するデータがありません。</li>
+      {% endif %}
+    </ul> -->
+
+    <!-- <h1>ポケモン種族値検索 & ダメージ計算</h1> -->
+    <section class="center-section">
+      <h2>How to use</h2>
+      <p>1. 攻撃・防御を行うポケモンの名前を入力して検索ボタンを押します．</p>
+      <p>2. 性格補正や努力値・個体値を入力します．</p>
+      <p>3. 技の威力などを設定して計算ボタンを押します．</p>
+    </section>
+
+    <div class="flex-container">
+
+      <!-- 攻撃側検索フォーム -->
+      <div class="left-column">
+        <h2>攻撃側のポケモン</h2>
+        <form method="post">
+          <input type="hidden" name="action" value="search_at">
+          <label>ポケモン名: <input type="text" name="search_name_At" value="{{ search_name_At }}"></label>
+          <br>
+          <button type="submit">検索</button>
+        </form>
+      </div>
+
+      <!-- 防御側検索フォーム -->
+      <div class="right-column">
+        <h2>防御側のポケモン</h2>
+        <form method="post">
+          <input type="hidden" name="action" value="search_bl">
+          <label>ポケモン名: <input type="text" name="search_name_Bl" value="{{ search_name_Bl }}"></label>
+          <br>
+          <button type="submit">検索</button>
+        </form>
+      </div>
+
+    </div>
+
+    {% if at_power is not none and bl_power is not none %}
+    <!-- 計算フォーム（攻防まとめて） -->
+    <form method="post" style="margin-top: 2rem;">
+      <input type="hidden" name="action" value="calculate">
+
+      <div class="flex-container">
+        <div class="left-column">
+          <p class="attack-stats">種族値</p>
+          <p>こうげき(A) = {{ at_power }}, とくこう(C) = {{ co_power }}</p>
+
+          <p class="attack-stats">性格</p>
+          <p><label>補正値: <input type="number" step="0.1" name="char_At" value="{{ char_At or '1' }}"></label></p>
+
+          <p class="attack-stats">努力値</p>
+          <p><label>こうげき(A): <input type="number" name="at_eff" value="{{ at_eff or '0' }}"></label></p>
+          <p><label>とくこう(C): <input type="number" name="co_eff" value="{{ co_eff or '0' }}"></label></p>
+
+          <p class="attack-stats">個体値</p>
+          <p><label>こうげき(A): <input type="number" name="at_indv" value="{{ at_indv or '0' }}"></label></p>
+          <p><label>とくこう(C): <input type="number" name="co_indv" value="{{ co_indv or '0' }}"></label></p>
+
+          <p class="attack-stats">追加数値</p>
+          <p><label>天候: <input type="number" name="calc_value" value="{{ calc_value or '0' }}"></label></p>
+        </div>
+
+        <div class="right-column">
+          <p class="defense-stats">種族値</p>
+          <p>ぼうぎょ(B) = {{ bl_power }}, とくぼう(D) = {{ de_power }}</p>
+
+          <p class="defense-stats">性格</p>
+          <p><label>補正値: <input type="number" step="0.1" name="char_Bl" value="{{ char_Bl or '1' }}"></label></p>
+
+          <p class="defense-stats">努力値</p>
+          <p><label>ぼうぎょ(B): <input type="number" name="bl_eff" value="{{ bl_eff or '0' }}"></label></p>
+          <p><label>とくぼう(D): <input type="number" name="de_eff" value="{{ de_eff or '0' }}"></label></p>
+
+          <p class="defense-stats">個体値</p>
+          <p><label>ぼうぎょ(B): <input type="number" name="bl_indv" value="{{ bl_indv or '0' }}"></label></p>
+          <p><label>とくぼう(D): <input type="number" name="de_indv" value="{{ de_indv or '0' }}"></label></p>
+
+          <p class="defense-stats">追加数値</p>
+          <p><label>天候: <input type="number" name="calc_value" value="{{ calc_value or '0' }}"></label></p>
+
+        </div>
+      </div>
+
+      <div class="center-section">
+        <p>
+          <label>物理 or 特殊:
+            <select name="skill_type">
+              <option value="physical" {% if skill_type=='physical' %}selected{% endif %}>物理</option>
+              <option value="special" {% if skill_type=='special' %}selected{% endif %}>特殊</option>
+            </select>
+          </label>
+        </p>
+        <p><label>威力: <input type="number" name="power" value="{{ power or '0' }}"></label></p>
+
+        <!-- 攻防 hidden input -->
+        <input type="hidden" name="at_power" value="{{ at_power }}">
+        <input type="hidden" name="co_power" value="{{ co_power }}">
+        <input type="hidden" name="bl_power" value="{{ bl_power }}">
+        <input type="hidden" name="de_power" value="{{ de_power }}">
+
+        <button type="submit">計算</button>
+      </div>
+    </form>
+    {% endif %}
+
+    {% if total_dmg is not none %}
+    <section class="result">
+      <p>最小ダメージ: {{ min_dmg }}</p>
+      <p>最大ダメージ: {{ max_dmg }}</p>
+    </section>
+    {% endif %}
+
+  </main>
+
+<footer>
+  <p>&copy; 2025 My Website</p>
+</footer>
+</body>
+</html>

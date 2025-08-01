@@ -1,0 +1,40 @@
+<!-- <!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <title>タイプ相性表</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  <style>
+    table.data { border-collapse: collapse; width: 100%; }
+    table.data th, table.data td { border: 1px solid #999; padding: 4px; text-align: center; }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>タイプ相性表</h1>
+    <nav>
+      <ul>
+        <li><a href="{{ url_for('index') }}">ホーム</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    {% for table in tables %}
+      {{ table|safe }}
+    {% endfor %}
+  </main>
+
+  <footer>
+    <p>&copy; 2025 My Website</p>
+  </footer>
+</body>
+</html> -->
+
+{% extends "base.html" %}
+
+{% block title %}タイプ相性表{% endblock %}
+
+{% block content %}
+  {% include "partials/type_chart_content.html" %}
+{% endblock %}

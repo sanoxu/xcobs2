@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <title>{% block title %}XCOBS2 支援サイト{% endblock %}</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <header class="header">
+    <h1>XCOBS2 支援サイト</h1>
+    <!-- <nav>
+      <ul>
+        <li><a href="{{ url_for('index') }}">ホーム</a></li>
+        <li><a href="{{ url_for('show_type_chart') }}">タイプ相性表</a></li>
+        <li><a href="#">お問い合わせ</a></li>
+      </ul>
+    </nav> -->
+    <nav>
+      <ul>
+        <li><a href="{{ url_for('index') }}" class="nav-link">ホーム</a></li>
+        <li><a href="{{ url_for('show_type_chart') }}" class="nav-link">タイプ相性表</a></li>
+        <li><a href="#" class="nav-link">お問い合わせ</a></li>
+      </ul>
+    </nav>
+    <!-- <nav>
+      <ul>
+        <li><a href="#" class="nav-link" data-partial-url="/partial/cobs2">ホーム</a></li>
+        <li><a href="#" class="nav-link" data-partial-url="/partial/type_chart">タイプ相性表</a></li>
+        <li><a href="#" class="nav-link" data-partial-url="#">お問い合わせ</a></li>
+      </ul>
+    </nav> -->
+  </header>
+
+  <!-- 背景動画 -->
+  <div class="video-background">
+    <video autoplay muted loop id="bgVideo">
+      <source src="{{ url_for('static', filename='videos/background.mp4') }}" type="video/mp4">
+      お使いのブラウザは動画をサポートしていません
+    </video>
+  </div>
+
+  <!-- 移動させるGIF画像 -->
+  <img id="myGif" src="{{ url_for('static', filename='images/morobareru_v2.gif') }}" style="position: absolute; top: 90px; left: 0px; width:100px;">
+
+  <!-- 音楽プレイヤー -->
+  <audio id="bgm" loop>
+    <source src="{{ url_for('static', filename='audio/bgm1.mp3') }}" type="audio/mpeg">
+    お使いのブラウザはオーディオをサポートしていません
+  </audio>
+
+  <p>Music Controls : 
+  <button onclick="document.getElementById('bgm').play()">Play</button>
+  <button onclick="document.getElementById('bgm').pause()">Pause</button></p>
+
+  <div id="content">
+    {% block content %}{% endblock %}
+  </div>
+
+  <footer>
+    <p>&copy; 2025 XCOBS2 Website</p>
+  </footer>
+
+  <!-- JavaScriptの読み込み -->
+  <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+</html>

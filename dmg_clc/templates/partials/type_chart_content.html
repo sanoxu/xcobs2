@@ -1,0 +1,19 @@
+<main>
+  <h1>タイプ相性表</h1>
+    {% for table in tables %}
+      {{ table|safe }}
+    {% endfor %}
+
+    <nav>
+      <ul>
+        <!-- <li><a href="{{ url_for('index') }}" class="nav-link">ホーム</a></li> -->
+        <li><a href="{{ url_for('index') }}" class="nav-link">ホーム</a></li>
+      </ul>
+    </nav>
+
+    <style>
+      table.data { border-collapse: collapse; width: 100%; }
+      table.data th, table.data td { border: 1px solid #999; padding: 4px; text-align: center; }
+    </style>
+    
+</main>
