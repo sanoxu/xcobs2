@@ -1,0 +1,307 @@
+[2025-08-01 11:09:04 +0000] [93320] [INFO] Starting gunicorn 23.0.0
+[2025-08-01 11:09:04 +0000] [93320] [INFO] Listening at: http://127.0.0.1:8000 (93320)
+[2025-08-01 11:09:04 +0000] [93320] [INFO] Using worker: sync
+[2025-08-01 11:09:04 +0000] [93321] [INFO] Booting worker with pid: 93321
+[2025-08-01 11:09:04 +0000] [93321] [ERROR] Exception in worker process
+Traceback (most recent call last):
+  File "/home/pipohkr01/xcobs2/venv/lib/python3.11/site-packages/gunicorn/arbiter.py", line 608, in spawn_worker
+    worker.init_process()
+  File "/home/pipohkr01/xcobs2/venv/lib/python3.11/site-packages/gunicorn/workers/base.py", line 135, in init_process
+    self.load_wsgi()
+  File "/home/pipohkr01/xcobs2/venv/lib/python3.11/site-packages/gunicorn/workers/base.py", line 147, in load_wsgi
+    self.wsgi = self.app.wsgi()
+                ^^^^^^^^^^^^^^^
+  File "/home/pipohkr01/xcobs2/venv/lib/python3.11/site-packages/gunicorn/app/base.py", line 66, in wsgi
+    self.callable = self.load()
+                    ^^^^^^^^^^^
+  File "/home/pipohkr01/xcobs2/venv/lib/python3.11/site-packages/gunicorn/app/wsgiapp.py", line 57, in load
+    return self.load_wsgiapp()
+           ^^^^^^^^^^^^^^^^^^^
+  File "/home/pipohkr01/xcobs2/venv/lib/python3.11/site-packages/gunicorn/app/wsgiapp.py", line 47, in load_wsgiapp
+    return util.import_app(self.app_uri)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/pipohkr01/xcobs2/venv/lib/python3.11/site-packages/gunicorn/util.py", line 370, in import_app
+    mod = importlib.import_module(module)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.11/importlib/__init__.py", line 126, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen importlib._bootstrap>", line 1206, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1178, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1142, in _find_and_load_unlocked
+ModuleNotFoundError: No module named 'app'
+[2025-08-01 11:09:04 +0000] [93321] [INFO] Worker exiting (pid: 93321)
+[2025-08-01 11:09:04 +0000] [93320] [ERROR] Worker (pid:93321) exited with code 3
+[2025-08-01 11:09:04 +0000] [93320] [ERROR] Shutting down: Master
+[2025-08-01 11:09:04 +0000] [93320] [ERROR] Reason: Worker failed to boot.
+[2025-08-01 11:11:30 +0000] [93332] [INFO] Starting gunicorn 23.0.0
+[2025-08-01 11:11:30 +0000] [93332] [INFO] Listening at: http://127.0.0.1:8000 (93332)
+[2025-08-01 11:11:30 +0000] [93332] [INFO] Using worker: sync
+[2025-08-01 11:11:30 +0000] [93333] [INFO] Booting worker with pid: 93333
+[2025-08-01 11:11:30 +0000] [93333] [ERROR] Exception in worker process
+Traceback (most recent call last):
+  File "/home/pipohkr01/xcobs2/venv/lib/python3.11/site-packages/gunicorn/arbiter.py", line 608, in spawn_worker
+    worker.init_process()
+  File "/home/pipohkr01/xcobs2/venv/lib/python3.11/site-packages/gunicorn/workers/base.py", line 135, in init_process
+    self.load_wsgi()
+  File "/home/pipohkr01/xcobs2/venv/lib/python3.11/site-packages/gunicorn/workers/base.py", line 147, in load_wsgi
+    self.wsgi = self.app.wsgi()
+                ^^^^^^^^^^^^^^^
+  File "/home/pipohkr01/xcobs2/venv/lib/python3.11/site-packages/gunicorn/app/base.py", line 66, in wsgi
+    self.callable = self.load()
+                    ^^^^^^^^^^^
+  File "/home/pipohkr01/xcobs2/venv/lib/python3.11/site-packages/gunicorn/app/wsgiapp.py", line 57, in load
+    return self.load_wsgiapp()
+           ^^^^^^^^^^^^^^^^^^^
+  File "/home/pipohkr01/xcobs2/venv/lib/python3.11/site-packages/gunicorn/app/wsgiapp.py", line 47, in load_wsgiapp
+    return util.import_app(self.app_uri)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/pipohkr01/xcobs2/venv/lib/python3.11/site-packages/gunicorn/util.py", line 370, in import_app
+    mod = importlib.import_module(module)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.11/importlib/__init__.py", line 126, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen importlib._bootstrap>", line 1206, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1178, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1142, in _find_and_load_unlocked
+ModuleNotFoundError: No module named 'app'
+[2025-08-01 11:11:30 +0000] [93333] [INFO] Worker exiting (pid: 93333)
+[2025-08-01 11:11:30 +0000] [93332] [ERROR] Worker (pid:93333) exited with code 3
+[2025-08-01 11:11:30 +0000] [93332] [ERROR] Shutting down: Master
+[2025-08-01 11:11:30 +0000] [93332] [ERROR] Reason: Worker failed to boot.
+[2025-08-01 11:12:19 +0000] [93344] [INFO] Starting gunicorn 23.0.0
+[2025-08-01 11:12:19 +0000] [93344] [INFO] Listening at: http://127.0.0.1:8000 (93344)
+[2025-08-01 11:12:19 +0000] [93344] [INFO] Using worker: sync
+[2025-08-01 11:12:19 +0000] [93345] [INFO] Booting worker with pid: 93345
+[2025-08-01 11:12:19 +0000] [93345] [ERROR] Exception in worker process
+Traceback (most recent call last):
+  File "/home/pipohkr01/xcobs2/venv/lib/python3.11/site-packages/gunicorn/arbiter.py", line 608, in spawn_worker
+    worker.init_process()
+  File "/home/pipohkr01/xcobs2/venv/lib/python3.11/site-packages/gunicorn/workers/base.py", line 135, in init_process
+    self.load_wsgi()
+  File "/home/pipohkr01/xcobs2/venv/lib/python3.11/site-packages/gunicorn/workers/base.py", line 147, in load_wsgi
+    self.wsgi = self.app.wsgi()
+                ^^^^^^^^^^^^^^^
+  File "/home/pipohkr01/xcobs2/venv/lib/python3.11/site-packages/gunicorn/app/base.py", line 66, in wsgi
+    self.callable = self.load()
+                    ^^^^^^^^^^^
+  File "/home/pipohkr01/xcobs2/venv/lib/python3.11/site-packages/gunicorn/app/wsgiapp.py", line 57, in load
+    return self.load_wsgiapp()
+           ^^^^^^^^^^^^^^^^^^^
+  File "/home/pipohkr01/xcobs2/venv/lib/python3.11/site-packages/gunicorn/app/wsgiapp.py", line 47, in load_wsgiapp
+    return util.import_app(self.app_uri)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/pipohkr01/xcobs2/venv/lib/python3.11/site-packages/gunicorn/util.py", line 370, in import_app
+    mod = importlib.import_module(module)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.11/importlib/__init__.py", line 126, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen importlib._bootstrap>", line 1206, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1178, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1142, in _find_and_load_unlocked
+ModuleNotFoundError: No module named 'app'
+[2025-08-01 11:12:19 +0000] [93345] [INFO] Worker exiting (pid: 93345)
+[2025-08-01 11:12:19 +0000] [93346] [INFO] Booting worker with pid: 93346
+[2025-08-01 11:12:19 +0000] [93346] [ERROR] Exception in worker process
+Traceback (most recent call last):
+  File "/home/pipohkr01/xcobs2/venv/lib/python3.11/site-packages/gunicorn/arbiter.py", line 608, in spawn_worker
+    worker.init_process()
+  File "/home/pipohkr01/xcobs2/venv/lib/python3.11/site-packages/gunicorn/workers/base.py", line 135, in init_process
+    self.load_wsgi()
+  File "/home/pipohkr01/xcobs2/venv/lib/python3.11/site-packages/gunicorn/workers/base.py", line 147, in load_wsgi
+    self.wsgi = self.app.wsgi()
+                ^^^^^^^^^^^^^^^
+  File "/home/pipohkr01/xcobs2/venv/lib/python3.11/site-packages/gunicorn/app/base.py", line 66, in wsgi
+    self.callable = self.load()
+                    ^^^^^^^^^^^
+  File "/home/pipohkr01/xcobs2/venv/lib/python3.11/site-packages/gunicorn/app/wsgiapp.py", line 57, in load
+    return self.load_wsgiapp()
+           ^^^^^^^^^^^^^^^^^^^
+  File "/home/pipohkr01/xcobs2/venv/lib/python3.11/site-packages/gunicorn/app/wsgiapp.py", line 47, in load_wsgiapp
+    return util.import_app(self.app_uri)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/pipohkr01/xcobs2/venv/lib/python3.11/site-packages/gunicorn/util.py", line 370, in import_app
+    mod = importlib.import_module(module)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.11/importlib/__init__.py", line 126, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen importlib._bootstrap>", line 1206, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1178, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1142, in _find_and_load_unlocked
+ModuleNotFoundError: No module named 'app'
+[2025-08-01 11:12:19 +0000] [93346] [INFO] Worker exiting (pid: 93346)
+[2025-08-01 11:12:19 +0000] [93344] [ERROR] Worker (pid:93345) exited with code 3
+[2025-08-01 11:12:19 +0000] [93344] [ERROR] Worker (pid:93346) was sent SIGTERM!
+[2025-08-01 11:12:19 +0000] [93344] [ERROR] Shutting down: Master
+[2025-08-01 11:12:19 +0000] [93344] [ERROR] Reason: Worker failed to boot.
+[2025-08-01 11:14:02 +0000] [93360] [INFO] Starting gunicorn 23.0.0
+[2025-08-01 11:14:02 +0000] [93360] [INFO] Listening at: http://127.0.0.1:8000 (93360)
+[2025-08-01 11:14:02 +0000] [93360] [INFO] Using worker: sync
+[2025-08-01 11:14:02 +0000] [93361] [INFO] Booting worker with pid: 93361
+[2025-08-01 11:14:02 +0000] [93361] [ERROR] Exception in worker process
+Traceback (most recent call last):
+  File "/home/pipohkr01/xcobs2/venv/lib/python3.11/site-packages/gunicorn/arbiter.py", line 608, in spawn_worker
+    worker.init_process()
+  File "/home/pipohkr01/xcobs2/venv/lib/python3.11/site-packages/gunicorn/workers/base.py", line 135, in init_process
+    self.load_wsgi()
+  File "/home/pipohkr01/xcobs2/venv/lib/python3.11/site-packages/gunicorn/workers/base.py", line 147, in load_wsgi
+    self.wsgi = self.app.wsgi()
+                ^^^^^^^^^^^^^^^
+  File "/home/pipohkr01/xcobs2/venv/lib/python3.11/site-packages/gunicorn/app/base.py", line 66, in wsgi
+    self.callable = self.load()
+                    ^^^^^^^^^^^
+  File "/home/pipohkr01/xcobs2/venv/lib/python3.11/site-packages/gunicorn/app/wsgiapp.py", line 57, in load
+    return self.load_wsgiapp()
+           ^^^^^^^^^^^^^^^^^^^
+  File "/home/pipohkr01/xcobs2/venv/lib/python3.11/site-packages/gunicorn/app/wsgiapp.py", line 47, in load_wsgiapp
+    return util.import_app(self.app_uri)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/pipohkr01/xcobs2/venv/lib/python3.11/site-packages/gunicorn/util.py", line 370, in import_app
+    mod = importlib.import_module(module)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.11/importlib/__init__.py", line 126, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen importlib._bootstrap>", line 1206, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1178, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1142, in _find_and_load_unlocked
+ModuleNotFoundError: No module named 'app'
+[2025-08-01 11:14:02 +0000] [93361] [INFO] Worker exiting (pid: 93361)
+[2025-08-01 11:14:02 +0000] [93360] [ERROR] Worker (pid:93361) exited with code 3
+[2025-08-01 11:14:02 +0000] [93360] [ERROR] Shutting down: Master
+[2025-08-01 11:14:02 +0000] [93360] [ERROR] Reason: Worker failed to boot.
+[2025-08-02 07:03:36 +0000] [178572] [INFO] Starting gunicorn 23.0.0
+[2025-08-02 07:03:36 +0000] [178572] [INFO] Listening at: http://127.0.0.1:8000 (178572)
+[2025-08-02 07:03:36 +0000] [178572] [INFO] Using worker: sync
+[2025-08-02 07:03:36 +0000] [178573] [INFO] Booting worker with pid: 178573
+[2025-08-02 07:03:36 +0000] [178573] [ERROR] Exception in worker process
+Traceback (most recent call last):
+  File "/home/pipohkr01/xcobs2/venv/lib/python3.11/site-packages/gunicorn/arbiter.py", line 608, in spawn_worker
+    worker.init_process()
+  File "/home/pipohkr01/xcobs2/venv/lib/python3.11/site-packages/gunicorn/workers/base.py", line 135, in init_process
+    self.load_wsgi()
+  File "/home/pipohkr01/xcobs2/venv/lib/python3.11/site-packages/gunicorn/workers/base.py", line 147, in load_wsgi
+    self.wsgi = self.app.wsgi()
+                ^^^^^^^^^^^^^^^
+  File "/home/pipohkr01/xcobs2/venv/lib/python3.11/site-packages/gunicorn/app/base.py", line 66, in wsgi
+    self.callable = self.load()
+                    ^^^^^^^^^^^
+  File "/home/pipohkr01/xcobs2/venv/lib/python3.11/site-packages/gunicorn/app/wsgiapp.py", line 57, in load
+    return self.load_wsgiapp()
+           ^^^^^^^^^^^^^^^^^^^
+  File "/home/pipohkr01/xcobs2/venv/lib/python3.11/site-packages/gunicorn/app/wsgiapp.py", line 47, in load_wsgiapp
+    return util.import_app(self.app_uri)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/pipohkr01/xcobs2/venv/lib/python3.11/site-packages/gunicorn/util.py", line 370, in import_app
+    mod = importlib.import_module(module)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.11/importlib/__init__.py", line 126, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen importlib._bootstrap>", line 1206, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1178, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1142, in _find_and_load_unlocked
+ModuleNotFoundError: No module named 'app'
+[2025-08-02 07:03:36 +0000] [178573] [INFO] Worker exiting (pid: 178573)
+[2025-08-02 07:03:36 +0000] [178572] [ERROR] Worker (pid:178573) exited with code 3
+[2025-08-02 07:03:36 +0000] [178572] [ERROR] Shutting down: Master
+[2025-08-02 07:03:36 +0000] [178572] [ERROR] Reason: Worker failed to boot.
+[2025-08-02 07:13:43 +0000] [179395] [INFO] Starting gunicorn 23.0.0
+[2025-08-02 07:13:43 +0000] [179395] [ERROR] Connection in use: ('127.0.0.1', 8000)
+[2025-08-02 07:13:43 +0000] [179395] [ERROR] connection to ('127.0.0.1', 8000) failed: [Errno 98] Address already in use
+[2025-08-02 07:13:44 +0000] [179395] [ERROR] Connection in use: ('127.0.0.1', 8000)
+[2025-08-02 07:13:44 +0000] [179395] [ERROR] connection to ('127.0.0.1', 8000) failed: [Errno 98] Address already in use
+[2025-08-02 07:13:45 +0000] [179395] [ERROR] Connection in use: ('127.0.0.1', 8000)
+[2025-08-02 07:13:45 +0000] [179395] [ERROR] connection to ('127.0.0.1', 8000) failed: [Errno 98] Address already in use
+[2025-08-02 07:13:46 +0000] [179395] [ERROR] Connection in use: ('127.0.0.1', 8000)
+[2025-08-02 07:13:46 +0000] [179395] [ERROR] connection to ('127.0.0.1', 8000) failed: [Errno 98] Address already in use
+[2025-08-02 07:13:47 +0000] [179395] [ERROR] Connection in use: ('127.0.0.1', 8000)
+[2025-08-02 07:13:47 +0000] [179395] [ERROR] connection to ('127.0.0.1', 8000) failed: [Errno 98] Address already in use
+[2025-08-02 07:13:48 +0000] [179395] [ERROR] Can't connect to ('127.0.0.1', 8000)
+[2025-08-02 08:13:59 +0000] [184674] [INFO] Starting gunicorn 23.0.0
+[2025-08-02 08:13:59 +0000] [184674] [ERROR] Connection in use: ('127.0.0.1', 8000)
+[2025-08-02 08:13:59 +0000] [184674] [ERROR] connection to ('127.0.0.1', 8000) failed: [Errno 98] Address already in use
+[2025-08-02 08:14:00 +0000] [184674] [ERROR] Connection in use: ('127.0.0.1', 8000)
+[2025-08-02 08:14:00 +0000] [184674] [ERROR] connection to ('127.0.0.1', 8000) failed: [Errno 98] Address already in use
+[2025-08-02 08:14:01 +0000] [184674] [ERROR] Connection in use: ('127.0.0.1', 8000)
+[2025-08-02 08:14:01 +0000] [184674] [ERROR] connection to ('127.0.0.1', 8000) failed: [Errno 98] Address already in use
+[2025-08-02 08:14:02 +0000] [184674] [ERROR] Connection in use: ('127.0.0.1', 8000)
+[2025-08-02 08:14:02 +0000] [184674] [ERROR] connection to ('127.0.0.1', 8000) failed: [Errno 98] Address already in use
+[2025-08-02 08:14:03 +0000] [184674] [ERROR] Connection in use: ('127.0.0.1', 8000)
+[2025-08-02 08:14:03 +0000] [184674] [ERROR] connection to ('127.0.0.1', 8000) failed: [Errno 98] Address already in use
+[2025-08-02 08:14:04 +0000] [184674] [ERROR] Can't connect to ('127.0.0.1', 8000)
+[2025-08-02 09:42:49 +0000] [190800] [INFO] Starting gunicorn 23.0.0
+[2025-08-02 09:42:49 +0000] [190800] [INFO] Listening at: http://127.0.0.1:8000 (190800)
+[2025-08-02 09:42:49 +0000] [190800] [INFO] Using worker: sync
+[2025-08-02 09:42:49 +0000] [190801] [INFO] Booting worker with pid: 190801
+[2025-08-02 09:42:49 +0000] [190801] [ERROR] Exception in worker process
+Traceback (most recent call last):
+  File "/home/pipohkr01/xcobs2/venv/lib/python3.11/site-packages/gunicorn/arbiter.py", line 608, in spawn_worker
+    worker.init_process()
+  File "/home/pipohkr01/xcobs2/venv/lib/python3.11/site-packages/gunicorn/workers/base.py", line 135, in init_process
+    self.load_wsgi()
+  File "/home/pipohkr01/xcobs2/venv/lib/python3.11/site-packages/gunicorn/workers/base.py", line 147, in load_wsgi
+    self.wsgi = self.app.wsgi()
+                ^^^^^^^^^^^^^^^
+  File "/home/pipohkr01/xcobs2/venv/lib/python3.11/site-packages/gunicorn/app/base.py", line 66, in wsgi
+    self.callable = self.load()
+                    ^^^^^^^^^^^
+  File "/home/pipohkr01/xcobs2/venv/lib/python3.11/site-packages/gunicorn/app/wsgiapp.py", line 57, in load
+    return self.load_wsgiapp()
+           ^^^^^^^^^^^^^^^^^^^
+  File "/home/pipohkr01/xcobs2/venv/lib/python3.11/site-packages/gunicorn/app/wsgiapp.py", line 47, in load_wsgiapp
+    return util.import_app(self.app_uri)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/pipohkr01/xcobs2/venv/lib/python3.11/site-packages/gunicorn/util.py", line 370, in import_app
+    mod = importlib.import_module(module)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.11/importlib/__init__.py", line 126, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen importlib._bootstrap>", line 1206, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1178, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1142, in _find_and_load_unlocked
+ModuleNotFoundError: No module named 'app'
+[2025-08-02 09:42:49 +0000] [190801] [INFO] Worker exiting (pid: 190801)
+[2025-08-02 09:42:49 +0000] [190800] [ERROR] Worker (pid:190801) exited with code 3
+[2025-08-02 09:42:49 +0000] [190800] [ERROR] Shutting down: Master
+[2025-08-02 09:42:49 +0000] [190800] [ERROR] Reason: Worker failed to boot.
+[2025-08-03 09:16:21 +0000] [287588] [INFO] Starting gunicorn 23.0.0
+[2025-08-03 09:16:21 +0000] [287588] [INFO] Listening at: http://127.0.0.1:8000 (287588)
+[2025-08-03 09:16:21 +0000] [287588] [INFO] Using worker: sync
+[2025-08-03 09:16:21 +0000] [287589] [INFO] Booting worker with pid: 287589
+[2025-08-03 09:16:21 +0000] [287589] [ERROR] Exception in worker process
+Traceback (most recent call last):
+  File "/home/pipohkr01/xcobs2/venv/lib/python3.11/site-packages/gunicorn/arbiter.py", line 608, in spawn_worker
+    worker.init_process()
+  File "/home/pipohkr01/xcobs2/venv/lib/python3.11/site-packages/gunicorn/workers/base.py", line 135, in init_process
+    self.load_wsgi()
+  File "/home/pipohkr01/xcobs2/venv/lib/python3.11/site-packages/gunicorn/workers/base.py", line 147, in load_wsgi
+    self.wsgi = self.app.wsgi()
+                ^^^^^^^^^^^^^^^
+  File "/home/pipohkr01/xcobs2/venv/lib/python3.11/site-packages/gunicorn/app/base.py", line 66, in wsgi
+    self.callable = self.load()
+                    ^^^^^^^^^^^
+  File "/home/pipohkr01/xcobs2/venv/lib/python3.11/site-packages/gunicorn/app/wsgiapp.py", line 57, in load
+    return self.load_wsgiapp()
+           ^^^^^^^^^^^^^^^^^^^
+  File "/home/pipohkr01/xcobs2/venv/lib/python3.11/site-packages/gunicorn/app/wsgiapp.py", line 47, in load_wsgiapp
+    return util.import_app(self.app_uri)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/pipohkr01/xcobs2/venv/lib/python3.11/site-packages/gunicorn/util.py", line 370, in import_app
+    mod = importlib.import_module(module)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.11/importlib/__init__.py", line 126, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen importlib._bootstrap>", line 1206, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1178, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1142, in _find_and_load_unlocked
+ModuleNotFoundError: No module named 'app'
+[2025-08-03 09:16:21 +0000] [287589] [INFO] Worker exiting (pid: 287589)
+[2025-08-03 09:16:21 +0000] [287588] [ERROR] Worker (pid:287589) exited with code 3
+[2025-08-03 09:16:21 +0000] [287588] [ERROR] Shutting down: Master
+[2025-08-03 09:16:21 +0000] [287588] [ERROR] Reason: Worker failed to boot.

@@ -42,7 +42,7 @@ main {
 }
 
 .attack-stats {
-  font-size: 1.3rem;
+  font-size: 1.2rem;
   color: #cc3300;
   background-color: #ffe6e6;
   padding: 0.5rem;
@@ -50,7 +50,7 @@ main {
 }
 
 .defense-stats {
-  font-size: 1.3rem;
+  font-size: 1.2rem;
   color: #0077cc;
   background-color: #e6f0ff;
   padding: 0.5rem;
@@ -94,10 +94,10 @@ main {
 } */
 
 .def {
-  font-size: 1.3rem;
+  font-size: 1.1rem;
   color: #000000;
   /* background-color: #ffffff; */
-  line-height: 0.7; /* 行間を少し広くする */
+  line-height: 1.0; /* 行間を少し広くする */
   /* padding: 0.1rem; */
   /* border-radius:2px; */
 }
@@ -205,19 +205,6 @@ main {
   margin-bottom: 1.0rem; /* 下の余白も少なく */
 }
 
-
-.center-section {
-  max-width: 1000px;          /* 横幅の上限を決める */
-  text-align: center;
-  margin-top: 2rem;    /* 上の余白を少なく */
-  margin-bottom: 2rem;
-  padding: 1rem;           /* 内側の余白 */
-  background-color: #ffffffd6; /* 薄いグレー背景 */
-  /* border: 1px solid #000000;    薄い枠線 */
-  border-radius: 8px;        /* 少し角丸 */
-  box-shadow: 2px 2px 8px rgba(0,0,0,0.1); /* 影をつける */
-}
-
 .center{
   max-width: 1000px;          /* 横幅の上限を決める */
   text-align: center;
@@ -244,6 +231,18 @@ main {
   box-sizing: border-box;
   border: 1px solid #ddd;
   border-radius: 8px;
+}
+
+.center-section {
+  max-width: 1000px;          /* 横幅の上限を決める */
+  text-align: center;
+  margin-top : 2rem;
+  margin-bottom: 2rem;
+  padding: 1rem;           /* 内側の余白 */
+  background-color: #ffffffd6; /* 薄いグレー背景 */
+  /* border: 1px solid #000000;    薄い枠線 */
+  border-radius: 8px;        /* 少し角丸 */
+  box-shadow: 2px 2px 8px rgba(0,0,0,0.1); /* 影をつける */
 }
 
 .right-column form {

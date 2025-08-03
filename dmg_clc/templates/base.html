@@ -18,8 +18,8 @@
     <nav>
       <ul>
         <li><a href="{{ url_for('index') }}" class="nav-link">ホーム</a></li>
-        <li><a href="{{ url_for('show_type_chart') }}" class="nav-link">タイプ相性表</a></li>
-        <li><a href="#" class="nav-link">お問い合わせ</a></li>
+        <!--<li><a href="{{ url_for('show_type_chart') }}" class="nav-link">タイプ相性表</a></li> -->
+        <!-- <li><a href="#" class="nav-link">お問い合わせ</a></li> -->
       </ul>
     </nav>
     <!-- <nav>
@@ -43,24 +43,70 @@
   <img id="myGif" src="{{ url_for('static', filename='images/morobareru_v2.gif') }}" style="position: absolute; top: 90px; left: 0px; width:100px;">
 
   <!-- 音楽プレイヤー -->
-  <audio id="bgm" loop>
-    <source src="{{ url_for('static', filename='audio/bgm1.mp3') }}" type="audio/mpeg">
+  <audio id="bgm">
+    <!-- <source src="{{ url_for('static', filename='audio/bgm1.mp3') }}" type="audio/mpeg"> -->
     お使いのブラウザはオーディオをサポートしていません
   </audio>
 
   <p>Music Controls : 
-  <button onclick="document.getElementById('bgm').play()">Play</button>
-  <button onclick="document.getElementById('bgm').pause()">Pause</button></p>
+  <button onclick="playRandomBgm()">Play</button>
+  <button onclick="stopBgm()">Pause</button></p>
 
   <div id="content">
     {% block content %}{% endblock %}
   </div>
+  
+  <section class="center-section">
+     <h2>お問い合わせ</h2>
+     <p>企画公式Twitter：@CobblemonSMP</p>
+     <p>サイト管理者：@sano_xu</p>
+  </section>
 
   <footer>
-    <p>&copy; 2025 XCOBS2 Website</p>
+    <!--<p>&copy; 2025 XCOBS2 Website</p> -->
+    <p>&copy;2025 Pokémon. &copy1995-2025 Nintendo/Creatures Inc./GAME FREAK inc.</p>
+    <p>これは「Pokémon Game Sound Library」の利用規約に同意し作成されたコンテンツです。</p>
   </footer>
 
   <!-- JavaScriptの読み込み -->
   <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+<script>
+function playRandomBgm() {
+  const bgmList = [
+    "{{ url_for('static', filename='audio/bgm1.mp3') }}",
+    "{{ url_for('static', filename='audio/bgm2.mp3') }}",
+    "{{ url_for('static', filename='audio/bgm3.mp3') }}",
+    "{{ url_for('static', filename='audio/bgm4.mp3') }}",
+    "{{ url_for('static', filename='audio/bgm5.mp3') }}"
+  ];
+  const randomIndex = Math.floor(Math.random() * bgmList.length);
+  const selectedBgm = bgmList[randomIndex];
+
+  const bgmPlayer = document.getElementById('bgm');
+  bgmPlayer.innerHTML = '';  // 前の source を消す
+  const source = document.createElement('source');
+  source.src = selectedBgm;
+  source.type = 'audio/mpeg';
+  bgmPlayer.appendChild(source);
+
+  bgmPlayer.load();
+  bgmPlayer.play();
+}
+
+function startRandomLoop() {
+  playRandomBgm();
+  
+  // 曲が終わったら次の曲を再生
+  bgmPlayer.onended = () => {
+    playRandomBgm();
+  };
+}
+
+function stopBgm() {
+  bgmPlayer.pause();
+  bgmPlayer.onended = null;  // イベント解除（任意）
+}
+</script>
+
 </body>
 </html>

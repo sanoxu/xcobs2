@@ -1,20 +1,31 @@
 <main>
     <section class="center-section">
     <h2 class="h2">About</h2>
-    <p class="def">COB2用のダメージ計算サイトです．</p>
-    <p class="def">"メガシンカ" "Z技" "ダイマックス" "テラスタル" を共用できます．</p>
+    <p class="lav_p">COB2用のダメージ計算サイトです．</p>
+    <p class="lav_p">"メガシンカ" "Z技" "ダイマックス" "テラスタル" の共用を想定しています．</p>
   </section>
 
   <section class="center-section">
     <h2 class="h2">How to use</h2>
-    <p class="def">1. ポケモンの名前を入力して検索ボタンを押します．</p>
-    <p class="def">2. 性格補正や努力値・個体値を入力します．</p>
-    <p class="def">3. 技の威力を入力して計算ボタンを押します．</p>
+    <p class="def">1. ポケモンの名前を入力して検索ボタンを押す(1体ずつ)</p>
+    <p class="def">2. ポケモンのレベルを入力する</p>
+    <p class="def">3. 技の分類/タイプ/威力を入力する</p>
+    <p class="def">4. 必要に応じて特殊要素/努力値/個体値/ランク/その他/共通条件を入力する</p>
+    <p class="def">5．入力内容を確認して計算ボタンを押す</p>
+    <br>
+    <p class="def">(技の相性だけを知りたい場合には1と3(タイプのみ)と5で可能)</p>
   </section>
+
+  <!-- <section class="center-section">
+    <h2 class="h2">ポケモンの調整等について</h2>
+    <p class="def">努力値:0から252まで調整可能．きのみやドーピングアイテム等で増減可能．</p>
+    <p class="def">個体値:0から31まで調整可能．おうかんで上げることは可能だが下げることは不可能．</p>
+    <p class="def">ランク:対戦中の能力上昇と低下を示す．±6まで変化する．</p>
+  </section> -->
 
   <div class="flex-container">
     <div class="left-column">
-      <h2 class="h2_main_at">攻撃側のポケモン</h2>
+      <h2 class="h2_main_at">① 攻撃側のポケモン</h2>
       <form method="post">
         <input type="hidden" name="action" value="search_at">
         <label class="lav_p">ポケモン名: <input class="lav_p" type="text" name="search_name_At" value="{{ search_name_At }}"></label>
@@ -23,12 +34,15 @@
     </div>
 
     <div class="right-column">
-      <h2 class="h2_main_def">防御側のポケモン</h2>
+      <h2 class="h2_main_def">② 防御側のポケモン</h2>
       <form method="post">
         <input type="hidden" name="action" value="search_bl">
         <label class="lav_p">ポケモン名: <input class="lav_p" type="text" name="search_name_Bl" value="{{ search_name_Bl }}"></label>
         <button class="button" type="submit">検索</button>
       </form>
+      <p class="lav_p_sm4">
+        <!-- <label class="lav_p_sm3">防御側に相性がいいタイプの表示は必要ありません <input type="checkbox" name="check_match" {% if check_match %}checked{% endif %}></label> -->
+      </p>
     </div>
   </div>
 
@@ -63,12 +77,36 @@
         </p>
         <p>
           <label class="lav_p">テラスタル: <input type="checkbox" name="at_terastal" {% if at_terastal %}checked{% endif %}></label>
-          <label class="lav_p_sm2">Tタイプ: <input class="small-input" type="text" name="at_teras_type" value="{{ at_teras_type or 'ノーマル' }}"></label>
+          <!--<label class="lav_p_sm2">Tタイプ: <input class="small-input" type="text" name="at_teras_type" value="{{ at_teras_type or 'ノーマル' }}"></label> -->
+	  <lavel class="lav_p_sm2">Tタイプ: 
+	  <select class="lav_p" name="at_teras_type">
+	    <option value="ノーマル"{% if at_teras_type=='ノーマル' %}selected{% endif %}>ノーマル</option>
+	    <option value="ほのお">ほのお</option>
+	    <option value="みず">みず</option>
+	    <option value="でんき">でんき</option>
+	    <option value="くさ">くさ</option>
+	    <option value="こおり">こおり</option>
+	    <option value="かくとう">かくとう</option>
+	    <option value="どく">どく</option>
+	    <option value="じめん">じめん</option>
+	    <option value="ひこう">ひこう</option>
+	    <option value="エスパー">エスパー</option>
+	    <option value="むし">むし</option>
+	    <option value="いわ">いわ</option>
+	    <option value="ゴースト">ゴースト</option>
+	    <option value="ドラゴン">ドラゴン</option>
+	    <option value="あく">あく</option>
+	    <option value="はがね">はがね</option>
+	    <option value="フェアリー">フェアリー</option>
+	  </select>
+	  </label>
         </p>
-        <p class="attack-stats">種族値</p>
+
+        <p class="attack-stats">③ 種族値</p>
+	<p><label class="lav_p">ポケモンのレベル: <input class="lav_p" type="number" name="lv_at" value="{{ lv_at or '0' }}"></label></p
         <p class="lav_p">こうげき(A) = {{ at_power }} / とくこう(C) = {{ co_power }}</p>
 
-        <p class="attack-stats">攻撃技</p>
+        <p class="attack-stats">④ 攻撃技</p>
         <p>
         <label class="lav_p">物理 or 特殊:
           <select class="button" name="skill_type">
@@ -78,29 +116,95 @@
         </label>
         </p>
         <p>
-        <label class="lav_p">タイプ: <input class="lav_p" type="text" name="type" value="{{ type or 'ノーマル' }}"></label>
+        <!--<label class="lav_p">タイプ: <input class="lav_p" type="text" name="types" value="{{ types or 'ノーマル' }}"></label> -->
+	<lavel class="lav_p">タイプ: 
+	  <select class="lav_p" name="types">
+	    <option value="ノーマル"{% if types=='ノーマル' %}selected{% endif %}>ノーマル</option>
+	    <option value="ほのお">ほのお</option>
+	    <option value="みず">みず</option>
+	    <option value="でんき">でんき</option>
+	    <option value="くさ">くさ</option>
+	    <option value="こおり">こおり</option>
+	    <option value="かくとう">かくとう</option>
+	    <option value="どく">どく</option>
+	    <option value="じめん">じめん</option>
+	    <option value="ひこう">ひこう</option>
+	    <option value="エスパー">エスパー</option>
+	    <option value="むし">むし</option>
+	    <option value="いわ">いわ</option>
+	    <option value="ゴースト">ゴースト</option>
+	    <option value="ドラゴン">ドラゴン</option>
+	    <option value="あく">あく</option>
+	    <option value="はがね">はがね</option>
+	    <option value="フェアリー">フェアリー</option>
+	  </select>
+	  </label>
         </p>
 
         <p><label class="lav_p">威力: <input class="lav_p" type="number" name="power" value="{{ power or '0' }}"></label></p>
 
-        <!-- <p class="attack-stats">性格</p> -->
-        <!-- <p class="lav_p"><label>補正値: <input class="lav_p" type="number" step="0.1" name="char_At" value="{{ char_At or '1' }}"></label></p> -->
+        <!-- <p class="attack-stats">性格</p     <!-- <p class="lav_p"><label>補正値: <input class="lav_p" type="number" step="0.1" name="char_At" value="{{ char_At or '1' }}"></label></p> -->
         
         <p class="attack-stats">努力値</p>
-        <p class="lav_p"><label>こうげき(A): <input class="lav_p" type="number" name="at_eff" value="{{ at_eff or '252' }}"></label></p>
+	<p class="lv_p_sm4">1ステータス毎に0~252の範囲で調整可能．</p>
+	<p class="lav_p"><label>こうげき(A): <input class="lav_p" type="number" name="at_eff" value="{{ at_eff or '252' }}"></label></p>
         <p class="lav_p"><label>とくこう(C): <input class="lav_p" type="number" name="co_eff" value="{{ co_eff or '252' }}"></label></p>
 
         <p class="attack-stats">個体値</p>
+	<p class="lv_p_sm4">1ステータス毎に0~31の範囲で調整可能．</p>
         <p class="lav_p"><label>こうげき(A): <input class="lav_p" type="number" name="at_indv" value="{{ at_indv or '31' }}"></label></p>
         <p class="lav_p"><label>とくこう(C): <input class="lav_p" type="number" name="co_indv" value="{{ co_indv or '31' }}"></label></p>
 
         <p class="attack-stats">ランク</p>
+	<p class="lv_p_sm4">1ステータス事に-6~+6の範囲で変化．</p>
         <p class="lav_p"><label>こうげき(A): <input class="lav_p" type="number" name="at_lank" value="{{ at_lank or '0' }}"></label></p>
         <p class="lav_p"><label>とくこう(C): <input class="lav_p" type="number" name="co_lank" value="{{ co_lank or '0' }}"></label></p>
 
         <p class="attack-stats">その他</p>
-        <p class="lav_p"><label>性格: <input class="lav_p" type="text" step="0.1" name="char_At" value="{{ char_At or 'ようき' }}"></label></p>
-        <p class="lav_p"><label>もちもの: <input class="lav_p" type="text" name="at_calc_value1" value="{{ at_calc_value1 or '' }}"></label></p>
+        <p class="lav_p">
+	<!-- <lavel class="lav_p">性格: <input class="lav_p" type="text" step="0.1" name="char_At" value="{{ char_At or 'ようき' }}"></label></p> -->
+	<lavel class="lav_p">性格: 
+	  <select class="lav_p" name="char_At">
+	    <option value="さみしがり"{% if char_At=='さみしがり' %}selected{% endif %}>さみしがり</option>
+	    <option value="いじっぱり">いじっぱり</option>
+	    <option value="やんちゃ">やんちゃ</option>
+	    <option value="ゆうかん">ゆうかん</option>
+	    <option value="ずぶとい">ずぶとい</option>
+	    <option value="わんぱく">わんぱく</option>
+	    <option value="のうてんき">のうてんき</option>
+	    <option value="のんき">のんき</option>
+	    <option value="ひかえめ">ひかえめ</option>
+	    <option value="おっとり">おっとり</option>
+	    <option value="うっかりや">うっかりや</option>
+	    <option value="れいせい">れいせい</option>
+	    <option value="おだやか">おだやか</option>
+	    <option value="おとなしい">おとなしい</option>
+	    <option value="しんちょう">しんちょう</option>
+	    <option value="なまいき">なまいき</option>
+	    <option value="おくびょう">おくびょう</option>
+	    <option value="せっかち">せっかち</option>
+	    <option value="ようき">ようき</option>
+	    <option value="むじゃき">むじゃき</option>
+            <option value="てれや">てれや</option>
+            <option value="がんばりや">がんばりや</option>
+            <option value="すなお">すなお</option>
+            <option value="きまぐれ">きまぐれ</option>
+            <option value="まじめ">まじめ</option>
+	  </select>
+	</label>
+	</p>
+        <p class="lav_p">
+	<!-- <label>もちもの: <input class="lav_p" type="text" name="at_calc_value1" value="{{ at_calc_value1 or '' }}"></label> -->
+	<lavel class="lav_p">もちもの: 
+	  <select class="lav_p" name="at_calc_value1">
+	    <option value=""{% if at_calc_value1=='' %}selected{% endif %}></option>
+	    <option value="ブーストエナジー">ブーストエナジー</option>
+	    <option value="こだわりハチマキ">こだわりハチマキ</option>
+	    <option value="こだわりメガネ">こだわりメガネ</option>
+	    <option value="いのちのたま">いのちのたま</option>
+	    </select>
+	</label>
+	</p>
       </div>
 
       <div class="right-column">
@@ -111,11 +215,35 @@
         </p>
         <p>
           <label class="lav_p">テラスタル: <input type="checkbox" name="bl_terastal" {% if at_terastal %}checked{% endif %}></label>
-          <label class="lav_p_sm2">Tタイプ: <input class="small-input" type="text" name="bl_teras_type" value="{{ bl_teras_type or 'ノーマル' }}"></label>
+          <!--<label class="lav_p_sm2">Tタイプ: <input class="small-input" type="text" name="bl_teras_type" value="{{ bl_teras_type or 'ノーマル' }}"></label> -->
+	  <lavel class="lav_p_sm2">Tタイプ: 
+	  <select class="lav_p" name="bl_teras_type">
+	    <option  value="ノーマル"{% if bl_teras_type=='ノーマル' %}selected{% endif %}>ノーマル</option>
+	    <option  value="ほのお">ほのお</option>
+	    <option  value="みず">みず</option>
+	    <option value="でんき">でんき</option>
+	    <option value="くさ">くさ</option>
+	    <option value="こおり">こおり</option>
+	    <option value="かくとう">かくとう</option>
+	    <option value="どく">どく</option>
+	    <option value="じめん">じめん</option>
+	    <option value="ひこう">ひこう</option>
+	    <option value="エスパー">エスパー</option>
+	    <option value="むし">むし</option>
+	    <option value="いわ">いわ</option>
+	    <option value="ゴースト">ゴースト</option>
+	    <option value="ドラゴン">ドラゴン</option>
+	    <option value="あく">あく</option>
+	    <option value="はがね">はがね</option>
+	    <option value="フェアリー">フェアリー</option>
+	  </select>
+	</label>
         </p>
+
         <p class="defense-stats">種族値</p>
         <!-- <p class="lav_p"><label>HP(H) 現在値: <input class="lav_p" type="number" name="base_hp" value="{{ base_hp or '0' }}"></label></p>
         <p class="lav_p">HP(補正済) = {{ hp_real }} </p> -->
+	<p><label class="lav_p">ポケモンのレベル: <input class="lav_p" type="number" name="lv_bl" value="{{ lv_bl or '0' }}"></label></p
         <p class="lav_p">HP(H) = {{ base_hp }} </p>
         <p class="lav_p_sm3">
         <label class="lav_p_sm3">最大値>現在値: <input type="checkbox" name="not_max" {% if not_max %}checked{% endif %}></label>
@@ -133,22 +261,81 @@
         
 
         <p class="defense-stats">努力値</p>
+	<p class="lv_p_sm4">1ステータス毎に0~252の範囲で調整可能．</p>
         <p class="lav_p"><label>HP(H): <input class="lav_p" type="number" name="hp_eff" value="{{ hp_eff or '252' }}"></label></p>
         <p class="lav_p"><label>ぼうぎょ(B): <input class="lav_p" type="number" name="bl_eff" value="{{ bl_eff or '252' }}"></label></p>
         <p class="lav_p"><label>とくぼう(D): <input class="lav_p" type="number" name="de_eff" value="{{ de_eff or '252' }}"></label></p>
 
         <p class="defense-stats">個体値</p>
+	<p class="lv_p_sm4">1ステータス毎に0~31の範囲で調整可能．</p>
         <p class="lav_p"><label>HP(H): <input class="lav_p" type="number" name="hp_indv" value="{{ hp_indv or '31' }}"></label></p>
         <p class="lav_p"><label>ぼうぎょ(B): <input class="lav_p" type="number" name="bl_indv" value="{{ bl_indv or '31' }}"></label></p>
         <p class="lav_p"><label>とくぼう(D): <input class="lav_p" type="number" name="de_indv" value="{{ de_indv or '31' }}"></label></p>
 
         <p class="defense-stats">ランク</p>
+	<p class="lv_p_sm4">1ステータス事に-6~+6の範囲で変化．</p>
         <p class="lav_p"><label>ぼうぎょ(B): <input class="lav_p" type="number" name="bl_lank" value="{{ bl_lank or '0' }}"></label></p>
         <p class="lav_p"><label>とくぼう(D): <input class="lav_p" type="number" name="de_lank" value="{{ de_lank or '0' }}"></label></p>
 
         <p class="defense-stats">その他</p>
-        <p class="lav_p"><label>性格: <input class="lav_p" type="text" step="0.1" name="char_Bl" value="{{ char_Bl or 'ずぶとい' }}"></label></p>
-        <p class="lav_p"><label>もちもの: <input class="lav_p" type="text" name="bl_calc_value1" value="{{ bl_calc_value1 or '' }}"></label></p>
+        <p class="lav_p">
+	<!--<label>性格: <input class="lav_p" type="text" step="0.1" name="char_Bl" value="{{ char_Bl or 'ずぶとい' }}"></label></p> -->
+
+	<lavel class="lav_p">性格: 
+	  <select class="lav_p" name="char_Bl">
+	    <option  value="さみしがり"{% if char_Bl=='さみしがり' %}selected{% endif %}>さみしがり</option>
+	    <option  value="いじっぱり">いじっぱり</option>
+	    <option  value="やんちゃ">やんちゃ</option>
+	    <option value="ゆうかん">ゆうかん</option>
+	    <option value="ずぶとい">ずぶとい</option>
+	    <option value="わんぱく">わんぱく</option>
+	    <option value="のうてんき">のうてんき</option>
+	    <option value="のんき">のんき</option>
+	    <option value="ひかえめ">ひかえめ</option>
+	    <option value="おっとり">おっとり</option>
+	    <option value="うっかりや">うっかりや</option>
+	    <option value="れいせい">れいせい</option>
+	    <option value="おだやか">おだやか</option>
+	    <option value="おとなしい">おとなしい</option>
+	    <option value="しんちょう">しんちょう</option>
+	    <option value="なまいき">なまいき</option>
+	    <option value="おくびょう">おくびょう</option>
+	    <option value="せっかち">せっかち</option>
+	    <option value="ようき">ようき</option>
+	    <option value="むじゃき">むじゃき</option>
+            <option value="てれや">てれや</option>
+            <option value="がんばりや">がんばりや</option>
+            <option value="すなお">すなお</option>
+            <option value="きまぐれ">きまぐれ</option>
+            <option value="まじめ">まじめ</option>
+	  </select>
+	</label>
+        </p>
+	<p class="lav_p">
+	<label>もちもの: <input class="lav_p" type="text" name="bl_calc_value1" value="{{ bl_calc_value1 or '' }}"></label>
+	<!-- <lavel class="lav_p">もちもの: 
+	  <select class="lav_p" name="bl_calc_value1">
+	    <option  value=""{% if bl_calc_value1=='' %}selected{% endif %}></option>
+	    <option  value="ブーストエナジー">ブーストエナジー</option>
+	    <option  value="こだわりハチマキ">こだわりハチマキ</option>
+	    <option value="こだわりメガネ">こだわりメガネ</option>
+	    <option value="いのちのたま">いのちのたま</option>
+	    <option value="こおり">こおり</option>
+	    <option value="かくとう">かくとう</option>
+	    <option value="どく">どく</option>
+	    <option value="じめん">じめん</option>
+	    <option value="ひこう">ひこう</option>
+	    <option value="エスパー">エスパー</option>
+	    <option value="むし">むし</option>
+	    <option value="いわ">いわ</option>
+	    <option value="ゴースト">ゴースト</option>
+	    <option value="ドラゴン">ドラゴン</option>
+	    <option value="あく">あく</option>
+	    <option value="はがね">はがね</option>
+	    <option value="フェアリー">フェアリー</option>
+	  </select>
+	</label> -->
+	</p>
 
         <!-- 攻防 hidden input -->
         <input type="hidden" name="at_power" value="{{ at_power }}">
@@ -192,16 +379,17 @@
 {% if total_dmg is not none %}
   <section class="center-section">
     <h2 class="h2">ダメージ＆HP残量</h2>
+    <p class="lav_p">攻撃は {{ type_match }} だ！</p>
+    <!-- <p class="lav_p">{{search_bl}} に対して等倍以上のタイプ: {{matching_types}}</p> -->
     <p class="lav_p">ダメージ: {{ min_dmg }} ~ {{ max_dmg }}</p>
-    <p class="lav_p">残りHP: {{ min_hp }} ~ {{ max_hp }} ({{par_min}}% ~ {{par_max}}%)</p>
+    <p class="lav_p">残りHP: {{ min_hp }} ~ {{ max_hp }} ({{par_max}}% ~ {{par_max}}%)</p>
     
     {% if kill != 5 %}
       <p class="lav_p">確定 {{ kill }} 発</p>
     {% else %}
       <p class="lav_p">確定 {{ kill }} 発以上</p>
+   </section>
 {% endif %}
 
-  </section>
 {% endif %}
-
 </main>

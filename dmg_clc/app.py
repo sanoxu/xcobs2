@@ -133,13 +133,13 @@ def index():
     search_name_At = ''
     search_name_Bl = ''
     search_name_skill = ''
-    lv = 50  # レベル
+    lv_at = lv_bl = 50  # レベル
 
     # 初期値を設定
     char_At = None
     char_Bl = None
     skill_type = None # 物理 or 特殊
-    type = None # タイプ
+    types = None # タイプ
     power = 0
     at_calc_value1 = bl_calc_value1 = None
     weather = field = None
@@ -178,6 +178,9 @@ def index():
     last_at = last_co = last_bl = last_de = 0
 
     choise = None
+
+    type_match = None
+    matching_types = []
 
     if request.method == 'POST':
         action = request.form.get('action')
@@ -252,8 +255,8 @@ def index():
             base_hp = session.get('base_hp')
 
             # type = request.form.get('type', '')
-            type = request.form.get('type', session.get('type', ''))
-            session['type'] = type
+            types = request.form.get('types', session.get('types', ''))
+            session['types'] = types
             skill_type = request.form.get('skill_type', '')
             power = int(request.form.get('power', 0) or 0)
             
@@ -308,10 +311,12 @@ def index():
 
             weather = request.form.get('weather', '')
             field = request.form.get('field', '')
+            lv_at = int(request.form.get('lv_at', session.get('lv_at', 0)) or 0)
+            lv_bl = int(request.form.get('lv_bl', session.get('lv_bl', 0)) or 0)
 
-            print(at_power, at_indv, at_eff, lv, char_At)
-            print(base_hp, bl_power, bl_indv, bl_eff, lv, char_Bl)
-            print(type, type1, type2, type3, type4)
+            print(at_power, at_indv, at_eff, lv_at, lv_bl, char_At)
+            print(base_hp, bl_power, bl_indv, bl_eff, lv_at, lv_bl,  char_Bl)
+            print(types, type1, type2, type3, type4)
             print(at_terastal, bl_terastal)
             print(at_teras_type, bl_teras_type)
 
@@ -342,11 +347,11 @@ def index():
             if not_max:            
                 hp_real = int(request.form.get('hp_real', session.get('hp_real', 1)) or 1)
             else:
-                hp_real = math.floor(math.floor(base_hp * 2 + hp_indv + hp_eff / 4) * lv / 100) + lv + 10
-            at_real = math.floor(math.floor(at_power * 2 + at_indv + at_eff / 4) * lv / 100 + 5) * at_nature
-            co_real = math.floor(math.floor(co_power * 2 + co_indv + co_eff / 4) * lv / 100 + 5) * co_nature
-            bl_real = math.floor(math.floor(bl_power * 2 + bl_indv + bl_eff / 4) * lv / 100 + 5) * bl_nature
-            de_real = math.floor(math.floor(de_power * 2 + de_indv + de_eff / 4) * lv / 100 + 5) * de_nature
+                hp_real = math.floor(math.floor(base_hp * 2 + hp_indv + hp_eff / 4) * lv_bl / 100) + lv_bl + 10
+            at_real = math.floor(math.floor(at_power * 2 + at_indv + at_eff / 4) * lv_bl / 100 + 5) * at_nature
+            co_real = math.floor(math.floor(co_power * 2 + co_indv + co_eff / 4) * lv_bl / 100 + 5) * co_nature
+            bl_real = math.floor(math.floor(bl_power * 2 + bl_indv + bl_eff / 4) * lv_bl / 100 + 5) * bl_nature
+            de_real = math.floor(math.floor(de_power * 2 + de_indv + de_eff / 4) * lv_bl / 100 + 5) * de_nature
             print(hp_real, at_real, co_real, bl_real, de_real)
             
             # もちもの
@@ -362,25 +367,25 @@ def index():
                     print(choise)
 
             ## 威力
-            intermediate = math.floor(lv * 2 / 5 + 2)
+            intermediate = math.floor(lv_at * 2 / 5 + 2)
             print(intermediate)
             print(power)
             # print("フィールドなどをpowerに掛ける") # 最終威力power_rev
             
             if field == 'エレキフィールド':
-                if type == 'でんき':
+                if types == 'でんき':
                     print("フィールド補正")
                     hosei_pow = 1.3
             if field == 'グラスフィールド':
-                if type == 'くさ':
+                if types == 'くさ':
                     hosei_pow =  1.3
                 # if type == 'じしん': # 技名
                 #     multiple2 = 0.5
             if field == 'ミストフィールド':
-                if type == 'ドラゴン':
+                if types == 'ドラゴン':
                     hosei_pow = 0.5
             if field == 'サイコフィールド':
-                if type == 'エスパー':
+                if types == 'エスパー':
                     hosei_pow = 1.3
             if field == None:
                 hosei_pow = 1.0
@@ -470,16 +475,16 @@ def index():
 
             ## その他補正
             if weather == 'はれ':
-                if type == 'ほのお':
+                if types == 'ほのお':
                     # print("晴れ補正")
                     multiple2 = 1.5
-                if type == 'みず':
+                if types == 'みず':
                     multiple2 = 0.5
             if weather == 'あめ':
                 # print("雨補正")
-                if type == 'みず':
+                if types == 'みず':
                     multiple2 =  1.5
-                if type == 'ほのお':
+                if types == 'ほのお':
                     multiple2 = 0.5
             if weather == None:
                 multiple2 = 1.0
@@ -489,8 +494,8 @@ def index():
 
             if at_terastal:
                 print("攻撃側テラス")
-                if type == type1 or type == type2 or type == at_teras_type:
-                    if (type == at_teras_type) and (type == type1 or type == type2):
+                if types == type1 or types == type2 or types == at_teras_type:
+                    if (types == at_teras_type) and (types == type1 or types == type2):
                         if property1 == 'てきおうりょく' or \
                             property2 == 'てきおうりょく' or \
                             property3 == 'てきおうりょく':
@@ -508,7 +513,7 @@ def index():
                 # power_rev =  power * multiple
 
             else:
-                if type == type1 or type == type2:
+                if types == type1 or types == type2:
                     if property1 == 'てきおうりょく' or \
                         property2 == 'てきおうりょく' or \
                         property3 == 'てきおうりょく':
@@ -526,13 +531,45 @@ def index():
 
             print(f"タイプ一致{multiple}")
 
+            if types and type3:
+               db_path = os.path.join('database', 'type_chart.db')
+               conn = sqlite3.connect(db_path)
+               cursor = conn.cursor()
+               print("ここにはいる？")
+               try:
+                  if type4 != None:
+                     cursor.execute(
+                     f"SELECT attacker, [{type3}], [{type4}] FROM type_chart")
+                     rows = cursor.fetchone()
+                     print(rows)
+
+                     if row in rows:
+                       attacker, val3, val4 = row
+                       print(attacker)
+                       if val3 is not None and val4 is not None and float(val3) >= 1.0 and float(val4) >= 1.0:
+                          matching_types.append(attacker)
+                  else:
+                     cursor.execute(
+                     f"SELECT attacker, [{type3}] FROM type_chart")
+                     rows = cursor.fetchone()
+
+                     if row in rows:
+                        attacker, val3 = row
+                        if val3 is not None and val3 >= 1.0:
+                            matching_types.append(attacker)
+               finally:
+                 conn.close()
+
+  
             if bl_terastal:
                 print("防御側テラス")
-                if type and bl_teras_type:
+                if types and bl_teras_type:
                     # DBへのパス（Flaskアプリからの相対パス）
                     db_path = os.path.join('database', 'type_chart.db')
                     conn = sqlite3.connect(db_path)
                     cursor = conn.cursor()
+                    cursor.execute("SELECT attacker FROM type_chart")
+                    print(cursor.fetchall)
 
                     try:
                         # type vs item_bl.type1
@@ -540,7 +577,7 @@ def index():
                             # 'SELECT multiplier FROM type_chart WHERE attacking_type=? AND defending_type=?',
                             # (type, item_bl.type1)
                             f"SELECT [{bl_teras_type}] FROM type_chart WHERE attacker = ?",
-                            (type,)
+                            (types,)
                         )
                         row = cursor.fetchone()
                         if row and row[0] is not None:
@@ -556,19 +593,18 @@ def index():
                     finally:
                         conn.close()
             else:
-                if type and type3:
+                if types and type3:
                     # DBへのパス（Flaskアプリからの相対パス）
                     db_path = os.path.join('database', 'type_chart.db')
                     conn = sqlite3.connect(db_path)
                     cursor = conn.cursor()
-
                     try:
                         # type vs item_bl.type1
                         cursor.execute(
                             # 'SELECT multiplier FROM type_chart WHERE attacking_type=? AND defending_type=?',
                             # (type, item_bl.type1)
                             f"SELECT [{type3}] FROM type_chart WHERE attacker = ?",
-                            (type,)
+                            (types,)
                         )
                         row = cursor.fetchone()
                         if row and row[0] is not None:
@@ -578,7 +614,7 @@ def index():
                         if type4 != None:
                             cursor.execute(
                                 f"SELECT [{type4}] FROM type_chart WHERE attacker = ?",
-                                (type,)
+                                (types,)
                             )
                             row = cursor.fetchone()
                             if row and row[0] is not None:
@@ -596,6 +632,16 @@ def index():
                     finally:
                         conn.close()
 
+            if type_multiplier == 0.0:
+                type_match = '無効'
+                print("無効だよ")
+                print(type_match)
+            if  1.0 > type_multiplier > 0.0:
+                type_match = 'いまひとつ'
+            if type_multiplier == 1.0:
+                type_match = '等倍'
+            if 1.0 < type_multiplier:
+                type_match = '抜群'
 
             ## ダメージの補正値
             if at_calc_value1 != None:
@@ -720,16 +766,20 @@ def index():
         bl_dynamax_level = session.get('bl_dynamax_level', 0)
         at_teras_type = session.get('at_teras_type', '')
         bl_teras_type = session.get('bl_teras_type', '')
+        lv_at = session.get('lv_at', 0)
+        lv_bl = session.get('lv_bl', 0)
+        types = session.get('types', '')
 
 
     context = dict(
-        lv=lv,
+        lv_at=session.get('lv_at', 0),
+        lv_bl = session.get('lv_bl', 0),
         search_name_At=session.get('search_name_At', ''),
         search_name_Bl=session.get('search_name_Bl', ''),
         char_At=char_At,
         char_Bl=char_Bl,
         skill_type=skill_type,
-        type=session.get('type', ''),
+        types=session.get('types', ''),
         
         at_dynamax_level = session.get('at_dynamax_level', ''),
         bl_dynamax_level = session.get('bl_dynamax_level', ''),
@@ -775,7 +825,9 @@ def index():
         par=par,
         kill=kill,
         par_min=par_min,
-        par_max=par_max
+        par_max=par_max,
+        type_match=type_match,
+        matching_types=matching_types
     )
 
     # 非同期リクエストの場合は部分テンプレートを返す
